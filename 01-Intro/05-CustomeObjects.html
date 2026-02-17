@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<title>Custom Objects</title>
+		<script>
+			function Marks(m1=0,m2=0,m3=0)
+			{
+				this.m1=m1;
+				this.m2=m2;
+				this.m3=m3;
+				this.total=function()
+				{
+					return this.m1+this.m2+this.m3;
+				}
+			}
+			// to get the deafult values if the user doesn't enter the data we need to use the || while defining the function
+			//this is called as constructor fucntion
+			function Student(sno,sname,fee)
+			{
+				this.sno=sno || 0;
+				this.sname=sname || "";
+				this.fee=fee || 0.0;
+				this.marks=[];
+				
+				this.addMarks=function(m)
+				{
+					this.marks.push(m);
+				}
+			}
+			s1=new Student(1,"karthik",10000);
+			s1.addMarks(new Marks(10,20,20));
+			s1.addMarks(new Marks(10,10,10));
+			s2=new Student(2,"hima",75000);
+			s2.addMarks(new Marks(10,20,10));
+			console.log(s1);
+			console.log(s2);
+			console.log(s1.marks[0].total());
+			
+			for(i in s1)
+			{
+				console.log(s1[i]);
+			}
+			
+			// we cannot add the attribute to the fucntional class so we do it by using the prototype
+			
+			Student.prototype.course="java";
+			
+			Student.prototype.test=function()
+			{
+				return "pass";
+			}
+			
+			Marks.prototype.hello=function()
+			{
+				return "hello from prototype";
+			}
+			//prototype accessing 
+			console.log(s1.course);
+			console.log(s1.test());
+			console.log(s1.marks[0].hello());
+		</script>
+	<head>
+	<body>
+	</body>
+</html>
