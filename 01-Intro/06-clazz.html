@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>Clazz</title>
+		<script>
+			//The class keyword is used to define the class.
+			//to declare the variables as private we are using the # infront of the variables.
+			class Student
+			{
+				#id;
+				#name;
+				#fee;
+				#course;
+				constructor(id,name,fee)
+				{
+					this.#id=id;
+					this.#name=name;
+					this.#fee=fee;
+					this.#course ="";
+				}
+				get course()
+				{
+					return this.#course;
+				}
+				set course(courseData)
+				{
+					this.#course=courseData;
+				}
+			}
+			student=new Student(1001,"karthik",4590.89);
+			student.course="java";
+			console.log(student,student.course);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
