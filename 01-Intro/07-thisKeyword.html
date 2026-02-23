@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<script>
+			
+			console.log(this);
+			
+			firstname="ravi";
+			lastname="kumar";
+			
+			function showfullname()
+			{
+				console.log(this.firstname + "," + this.lastname);
+			}
+			
+			person={
+				firstname:"ramesh",
+				lastname:"goud",
+				showfullname:function(age,area)
+				{
+					console.log(this.firstname + "," + this.lastname+","+age+","+area);
+				}
+			}
+			
+			anotherPersion={
+				firstname:"rakesh",
+				lastname:"roshan",
+			}
+			
+			window.showfullname();
+			person.showfullname(25);
+			
+			person.showfullname.apply(anotherPersion);
+			
+			
+			function ondocumentload()
+			{
+				console.log("hello");
+				btnobj=document.getElementById("btn");
+				btnobj.onclick=person.showfullname.call(person,35,"shapur");
+			}
+		</script>
+	</head>
+	<body onload=ondocumentload()>
+		<input type="button" id="btn" name="btn">
+	</body>
+</html
