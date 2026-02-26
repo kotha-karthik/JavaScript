@@ -1,0 +1,120 @@
+<html>
+	<head>
+		<title>Question-1</title>
+		<script>
+			class Product
+			{
+				#p_id;
+				#p_name;
+				#p_price;
+				#p_qty;
+				constructor(p_id,p_name,p_price,p_qty)
+				{
+					this.#p_id=p_id;
+					this.#p_name=p_name;
+					this.#p_price=p_price;
+					this.#p_qty=p_qty;
+				}
+				get p_id(){
+					return this.#p_id;
+				}
+				get p_name()
+				{
+					return this.#p_name;
+				}
+				get p_price()
+				{
+					return this.#p_price;
+				}
+				get p_qty()
+				{
+					return this.#p_qty;
+				}
+			}
+			arr=[];
+			function addProduct()
+				{
+					id=document.getElementById("id").value;
+					name=document.getElementById("name").value;
+					price=document.getElementById("price").value;
+					qty=document.getElementById("qty").value;
+					newProduct=new Product(id,name,price,qty);
+					this.arr.push(newProduct);
+					
+					
+					document.getElementById("id").value = "";
+					document.getElementById("name").value = "";
+					document.getElementById("price").value = "";
+					document.getElementById("qty").value = "";
+				}
+				function displayProduct()
+				{
+					container = document.getElementById("Container");
+					container.innerHTML = "";
+					table = document.createElement("table");
+					table.border = "1";
+					header = table.insertRow();
+					header.innerHTML = "<th>ID</th><th>Name</th><th>Price</th><th>Qty</th><th>EDIT</th>";
+					for (i of arr) {
+						row = table.insertRow();
+						cell1 = row.insertCell(0);
+						cell2 = row.insertCell(1);
+						cell3 = row.insertCell(2);
+						cell4 = row.insertCell(3);
+						cell5 = row.insertCell(4);
+
+						cell1.innerText = i.p_id;    
+						cell2.innerText = i.p_name; 
+						cell3.innerText = i.p_price; 
+						cell4.innerText = i.p_qty;
+						
+						button=document.createElement("input");
+						button.type="button";
+						button.value="Edit";
+						//button.onclick=populateForm.apply(i);
+						button.onclick = (function(p) {
+							return function() {
+								document.getElementById("id").value = p.p_id;
+								document.getElementById("name").value = p.p_name;
+								document.getElementById("price").value = p.p_price;
+								document.getElementById("qty").value = p.p_qty;
+							};
+						})(i);
+						cell5.appendChild(button);
+					}
+					container.appendChild(table);
+				}
+				function populateForm() {
+					document.getElementById("id").value    = this.p_id;
+					document.getElementById("name").value  = this.p_name;
+					document.getElementById("price").value = this.p_price;
+					document.getElementById("qty").value   = this.p_qty;
+				}
+				function updateProduct()
+				{
+					currentId = document.getElementById("id").value;
+					newName = document.getElementById("name").value;
+					newPrice = document.getElementById("price").value;
+					newQty = document.getElementById("qty").value;
+					for (i = 0; i < arr.length; i++) {
+						if (arr[i].p_id === currentId) {
+							arr[i] = new Product(currentId, newName, newPrice, newQty);
+							break;
+						}
+					}
+					alert("Product Updated");
+					displayProduct();
+				}
+		</script>
+	</head>
+	<body>
+		Product_id=<input type="text" id="id" name="id"></br>
+		Product_name=<input type="text" id="name" name="name"></br>
+		Product_price=<input type="text" id="price" name="price"></br>
+		Product_qty=<input type="text" id="qty" name="qty"></br>
+		<input type="button" value="AddProduct" onclick="addProduct()">
+		<input type="button" value="DisplayProduct" onclick="displayProduct()">
+		<input type="button" value="UpdateProduct" onclick="updateProduct()">
+		<div id="Container"></div>
+	</body>
+</html>
