@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<script>
+			
+			function resolve_reject(resolve,reject){
+				
+				var success=true;
+				
+				if(success)
+				{
+					setTimeout(resolve,500,"success 1");
+				}
+				else{
+					reject("failed 1");
+				}
+			}
+			
+			function whenresolve(value)
+			{
+				console.log(value);
+			}
+			
+			function whenreject(value)
+			{
+				console.log(value);
+			}
+			
+			var promise1=new Promise(resolve_reject);
+			//promise1.then(whenresolve,whenreject);
+			
+			
+			var promise2=new Promise((resolve,reject)=>{
+				var sucess=true;
+				if(sucess)
+				{
+					resolve("success 2");
+				}
+				else{
+					reject("failed 2");
+				}
+			});
+			
+			/*promise2.then((value)=>{
+				console.log(value);
+			},(error)=>{
+				console.log(error);
+			});*/
+			
+			promise1.then((value)=>{
+				console.log(value);
+				return promise2;
+			}).then((value)=>{
+				console.log(value);
+			}).catch((error)=>console.log(error));
+			
+			
+			console.log("done");
+			
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>
