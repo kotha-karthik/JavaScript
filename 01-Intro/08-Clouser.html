@@ -1,0 +1,68 @@
+<html>
+	<head>
+		<script>
+			function showname(firstname,lastname)
+			{
+				var nameintro="your name is ";
+				
+				function showfullname()
+				{
+					return nameintro+firstname+lastname;
+				}
+				
+				return showfullname;
+			}
+			
+			var x=showname("karthik ","koppewar");
+			
+			console.log(x());
+			
+			
+			function celebrityID () {
+				var celebrityID = 999;
+				return {
+					getID: function ()  {
+					  return celebrityID;
+					},
+					setID: function (theNewID)  {
+						celebrityID = theNewID;
+					}
+				}
+			}
+
+			var mjID = celebrityID (); 
+			console.log(mjID.getID());
+			mjID.setID(567);
+			console.log(mjID.getID()); 
+			
+			function celebrityIDCreator (theCelebrities) {
+				var i;
+				var uniqueID = 100;
+				for (i = 0; i < theCelebrities.length; i++) {
+				  theCelebrities[i]["id"] = (function (j)  {
+						return (function()
+						{
+							return uniqueID + j;
+						})();
+				  })(i);
+				}
+				return theCelebrities;
+			}
+			var actionCelebs = [
+									{name:"Stallone", id:0}, 
+									{name:"Cruise", id:0}, 
+									{name:"Willis", id:0}
+							];
+
+			var createIdForActionCelebs = celebrityIDCreator (actionCelebs);
+
+			var stalloneID = createIdForActionCelebs [0];
+			
+			console.log(stalloneID.id);
+			
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
