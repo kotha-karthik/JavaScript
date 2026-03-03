@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<script>
+			
+			function loadFile(obj)
+			{
+				
+				var filereader=new FileReader();
+				filereader.onload=function(){
+					document.getElementById("imgtag").src=this.result;
+				}
+				filereader.readAsDataURL(obj.files[0]);
+			}
+		</script>
+	</head>
+	<body>
+		<input type="file" id="imagefile" multiple onchange="loadFile(this)">
+		<img src="" id="imgtag"/>
+	</body>
+</html>
