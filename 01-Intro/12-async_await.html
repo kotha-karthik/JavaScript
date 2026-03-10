@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<script>
+			
+			var countriespromise=new Promise((resolve,reject)=>{
+				let success=true;
+				
+				if(success)
+				{
+					resolve(["India","USA","LONDON"]);
+				}
+				else{
+					reject("No Data found");
+				}
+			});
+			
+			var statespromise=new Promise((resolve,reject)=>{
+				let success=true;
+				
+				if(success)
+				{
+					resolve(["TS","Andhra","Delhi"]);
+				}
+				else{
+					reject("No Data found");
+				}
+			});
+			
+			//countriespromise.then((data)=>console.log(data)).catch((error)=>console.log(error));
+			
+			async function loadCountries()
+			{
+				try{
+					let countries=await countriespromise;
+					return countries;
+				}catch(error){
+					console.log(error);
+				}
+			}
+			
+			async function loadStates(country)
+			{
+				try{
+					let states=await statespromise;
+					return states;
+				}catch(error){
+					console.log(error);
+				}
+			}
+			
+			(async function()
+			{
+				var countries=await loadCountries();
+				loadStates(countries[0]).then((data)=>console.log(data));
+				console.log(countries);
+			})();
+			
+			var countries=loadCountries();
+			console.log(countries);
+			
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>
