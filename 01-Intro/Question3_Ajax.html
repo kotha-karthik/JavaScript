@@ -1,0 +1,55 @@
+/* If you created Country → State → City dropdowns (dependent dropdowns) using JavaScript/AJAX
+To knew about the Call BAck hell problem..
+*/
+<html>
+	<head>
+		<script>
+				function getCountries()
+				{
+					var xhr = new XMLHttpRequest();
+					xhr.open("GET","http://localhost:8080/countries/",true);
+					
+					xhr.onload = function(){
+						if(xhr.status == 200){
+							var countries = JSON.parse(xhr.responseText);
+							var firstCountry = countries[0];
+							console.log("Country:",firstCountry);
+							getStates(firstCountry);
+						}
+					}
+					xhr.send();
+				}
+				function getStates(country)
+				{
+					var xhr = new XMLHttpRequest();
+					xhr.open("GET","http://localhost:8080/states/"+country,true);
+					xhr.onload = function(){
+						if(xhr.status == 200){
+							var states = JSON.parse(xhr.responseText);
+							var firstState = states[0];
+							console.log("State:",firstState);
+							getCities(firstState);
+						}
+					}
+					xhr.send();
+				}
+				function getCities(state)
+				{
+					var xhr = new XMLHttpRequest();
+					xhr.open("GET","http://localhost:8080/city/"+state,true);
+					xhr.onload = function(){
+						if(xhr.status == 200){
+							var city = JSON.parse(xhr.responseText);
+							var firstCity = city[0];
+							console.log("City:",firstCity);
+						}
+					}
+					xhr.send();
+				}
+			getCountries();
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
