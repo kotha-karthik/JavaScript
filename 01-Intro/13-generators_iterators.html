@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<script>
+			function *generateInts()
+			{
+				let i=0;
+				while(i<3)
+				{
+					yield i++;
+				}
+			}
+			
+			
+			function *getValues(arr)
+			{
+				for(i=0;i<arr.length;i++)
+				{
+					yield arr[i];
+				}
+			}
+			
+			var generator=generateInts();
+			
+			var obj=generator.next();
+			while(!obj.done){
+				console.log(obj.value,obj.done);
+				obj=generator.next();
+			}
+			
+			
+			var arrayGenerator=getValues([10,20,30,40,50]);
+			
+			var obj=arrayGenerator.next();
+			while(!obj.done){
+				console.log(obj.value,obj.done);
+				obj=arrayGenerator.next();
+			}
+			
+			
+			function *getProducts(products)
+			{
+				for(i=0;i<products.length;i++)
+				{
+					yield products[i];
+				}
+			}
+			
+			var prods=[	
+						{id:1001,name:"dell",price:4500},
+						{id:1002,name:"samsung",price:6500},
+						{id:1003,name:"lenovo",price:7500}
+					];
+			
+			var productsGenerator=getProducts(prods);
+			var obj=productsGenerator.next();
+			while(!obj.done){
+				console.log(obj.value.id,obj.value.name,obj.value.price);
+				obj=productsGenerator.next();
+			}
+			
+			
+			//custom iterator
+			
+			function MyIterator()
+			{
+				var i=0;
+				return {
+					next:function(){
+						if(i<5)
+						{
+							return { value:i++,done:false };
+						}
+						return { value:undefined,done:true };
+					}
+				}
+			}
+			
+			let iterator=MyIterator();
+			obj=iterator.next();
+			while(!obj.done)
+			{
+				console.log(obj.value);
+				obj=iterator.next();
+			}
+			
+		</script>
+	</head>
+	
+	<body>
+	
+	</body>
+</html>
